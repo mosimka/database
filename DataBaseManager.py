@@ -84,7 +84,8 @@ class DataBaseManager:
         self.close()
 
     def createDB(self) -> None:
-        filename = os.path.join(self.config.folder, 'sql_request')
+        filename = os.path.join(os.path.dirname(self.config.folder),
+                                'sql_request')
         filename = os.path.join(filename, SQL_CREATOR)
         with open(filename, 'r', encoding='utf-8') as file:
             sql_script = file.read()

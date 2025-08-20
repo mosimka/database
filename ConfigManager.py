@@ -3,7 +3,7 @@ import configparser
 from threading import Lock
 
 FOLDER_PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FOLDER_FILES = os.path.join(FOLDER_PROJECT,"DataBase")
+FOLDER_FILES = os.path.join(FOLDER_PROJECT,"configs")
 
 class ConfigManager:
     

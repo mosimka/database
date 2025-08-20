@@ -204,6 +204,7 @@ class DataBase(DataBaseManager):
             values = cursor.fetchone()
             columns = list(map(lambda x: x[0], cursor.description))
             if not values:
+                return {}
                 raise DBError(f"Не найден в таблице {table} в колонке "
                               f"{key} значение {value}")
             return dict(zip(columns, values))
