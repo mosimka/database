@@ -34,14 +34,29 @@ class DataBase(DataBaseManager):
     class Column:
         """Класс для представления информации о колонке таблицы"""
 
-        class Type(Enum):
+        class Type(Enum):           
+            class null:
+                def __call__(self, t):
+                    return None
+                
+                def __repr__(self):
+                    return "<NULL>"
+                
+            class dt:
+                def __call__(self, t):
+                    return datetime.strptime(t, "%Y-%m-%d %H:%M:%S")
+                
+                def __repr__(self):
+                    return "<DATETIME>"
+            
+            NULL = null()
             INTEGER = int
             REAL = float
             TEXT = str
             BLOB = bytes
             BOOLEAN = bool
-            DATETIME = datetime
-
+            DATETIME = dt()
+            
             @classmethod
             def get(cls, name: str):
                 for t in cls:
@@ -64,6 +79,7 @@ class DataBase(DataBaseManager):
         def convert(self, value: Any) -> Any:
             if value is None: #and not self.notnull:
                 return None
+            print(self.col_type)
             return self.col_type.value(value)
 
 
