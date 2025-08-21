@@ -39,6 +39,8 @@ class DataBase(DataBaseManager):
             REAL = float
             TEXT = str
             BLOB = bytes
+            BOOLEAN = bool
+            DATETIME = datetime
 
             @classmethod
             def get(cls, name: str):
