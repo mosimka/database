@@ -55,7 +55,7 @@ class DataBase(DataBaseManager):
             TEXT = str
             BLOB = bytes
             BOOLEAN = bool
-            DATETIME = dt()
+            DATETIME = datetime
             
             @classmethod
             def get(cls, name: str):
@@ -79,7 +79,6 @@ class DataBase(DataBaseManager):
         def convert(self, value: Any) -> Any:
             if value is None: #and not self.notnull:
                 return None
-            print(self.col_type)
             return self.col_type.value(value)
 
 
