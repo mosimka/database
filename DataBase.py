@@ -1,12 +1,10 @@
 """Класс для работы с БД"""
-
 from datetime import datetime
-from .DataBaseManager import DataBaseManager
-from .ConfigManager import ConfigManager
-from utils import FORMAT_DATE
-
 from enum import Enum
 from typing import List, Callable, Tuple, Dict, Any
+
+from .DataBaseManager import DataBaseManager
+from .ConfigManager import ConfigManager
 
 
 class DBError(Exception):
@@ -137,7 +135,7 @@ class DataBase(DataBaseManager):
             try:
                 dt = datetime.fromtimestamp(int(value))
             except ValueError:
-                dt = datetime.strptime(value, FORMAT_DATE)
+                dt = datetime.strptime(value, "%Y-%m-%d %H:%M:%S")
             return dt
 
     @property

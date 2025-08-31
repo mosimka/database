@@ -26,9 +26,10 @@ class DataBaseManager:
         return cls._instance
 
     def __init__(self, config: ConfigManager):
+        ...
         # if not os.path.exists(self.fullpath):
         # self.createDB()
-        self.createDB()
+        self.createDB() # NOTE : Сейчас БД зачищается при запуске!
 
     def _setup_global_error_handler(self):
         """Перехватывает все необработанные исключения в программе."""
@@ -76,7 +77,6 @@ class DataBaseManager:
     def close(self) -> None:
         """Явное закрытие соединения, если оно открыто."""
         if self._connection is not None:
-            # self._connection.rollback()
             self._connection.close()
             self._connection = None
 
