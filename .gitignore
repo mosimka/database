@@ -2,4 +2,4 @@
 __pycache__/
 __old/
 .pytest_cache/
-sql_request/
+*.ini
