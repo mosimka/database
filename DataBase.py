@@ -80,8 +80,8 @@ class DataBase(DataBaseManager):
             return self.col_type.value(value)
 
 
-    def __init__(self, config: ConfigManager):
-        super().__init__(config)
+    def __init__(self, config: ConfigManager, is_test: bool):
+        super().__init__(config, is_test)
         self._tables = {table: self._getColumns(table)
                         for table in self.tables}
 
@@ -494,7 +494,7 @@ class DataBase(DataBaseManager):
         int
             Идентификатор вставленной записи.
         """
-
+        print(kwargs)
         id_ = kwargs.pop("id") if "id" in list(kwargs.keys()) else None
         self.filterKwargs(kwargs)
         self._autocommit = autocommit

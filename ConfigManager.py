@@ -41,6 +41,11 @@ class ConfigManager:
             'archiveFolder': archive_folder, 
             'dbName': "database.db3",
         }
+        self.config['DB_TEST'] = {
+            'dbFolder': self.folder_db,
+            'archiveFolder': archive_folder, 
+            'dbName': "database_test.db3",
+        }
         os.makedirs(self.folder_db, exist_ok=True)
         os.makedirs(archive_folder, exist_ok=True)
         self.saveConfig()
@@ -53,18 +58,24 @@ class ConfigManager:
         """Сохраняет текущие настройки в конфигурационный файл."""
         with open(self.filename, 'w') as configfile:
             self.config.write(configfile)
+    
+    def getKey(self, is_test:bool=True):
+        key = "DB"
+        if is_test:
+            key += "_TEST"
+        return key
 
-    def getDbFolder(self):
+    def getDbFolder(self, is_test:bool=True):
         """Возвращает путь к папке базы данных."""
-        return self.config['DB'].get('dbFolder', '')
+        return self.config[self.getKey(is_test)].get('dbFolder', '')
     
-    def getArchivesFolder(self):
+    def getArchivesFolder(self, is_test:bool=True):
         """Возвращает путь к папке c архивами БД."""
-        return self.config['DB'].get('archiveFolder', '')
+        return self.config[self.getKey(is_test)].get('archiveFolder', '')
     
-    def getDbCurrent(self):
+    def getDbCurrent(self, is_test:bool=True):
         """Возвращает путь к текущей базе данных."""
-        return self.config['DB'].get('dbName', '')
+        return self.config[self.getKey(is_test)].get('dbName', '')
 
     def setDbFolder(self, folder_path):
         """Устанавливает путь к папке базы данных."""
